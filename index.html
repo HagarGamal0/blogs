@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ask Question</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background image with opacity handled via CSS -->
+  <div class="background-image"></div>
+
+  <!-- Form content -->
+  <div class="overlay">
+    <div class="form-box">
+      <h2>Ask Question</h2>
+      <form id="questionForm">
+        <input type="text" name="question" placeholder="Add question" required />
+        <textarea name="description" placeholder="Add description" required></textarea>
+        <input type="file" name="fileInput" />
+        <div class="buttons">
+          <button type="button" onclick="window.location.reload()">Cancel</button>
+          <button type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
