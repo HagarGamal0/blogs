@@ -1,36 +1,53 @@
-var form = document.getElementById("questionForm");
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("questionForm");
 
-form.onsubmit = function(event) {
-  event.preventDefault();
+  form.onsubmit = function (event) {
+    event.preventDefault();
 
-  var question = form.elements["question"].value;
-  var description = form.elements["description"].value;
-  var fileInput = form.elements["fileInput"];
-  var fileName = "";
+    const question = form.elements["question"].value.trim();
+    const description = form.elements["description"].value.trim();
+    const fileInput = form.elements["fileInput"];
+    const file = fileInput.files[0];
 
-  if (fileInput.files && fileInput.files.length > 0) {
-    fileName = fileInput.files[0].name;
-  }
+    if (!question || !description) {
+      alert("Please fill out the question and description.");
+      return;
+    }
 
-  var newBlog = {
-    title: question,
-    content: description,
-    author: "Anonymous", 
-    fileName: fileName
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      const imageData = reader.result;
+
+      const newBlog = {
+        title: question,
+        content: description,
+        author: "Anonymous",
+        imageData: imageData || ""
+      };
+
+      const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+      blogs.push(newBlog);
+      localStorage.setItem("blogs", JSON.stringify(blogs));
+
+      window.location.href = "home.html";
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      const newBlog = {
+        title: question,
+        content: description,
+        author: "Anonymous",
+        imageData: ""
+      };
+
+      const blogs = JSON.parse(localStorage.getItem("blogs")) || [];
+      blogs.push(newBlog);
+      localStorage.setItem("blogs", JSON.stringify(blogs));
+
+      window.location.href = "home.html";
+    }
   };
-
-  var blogs = JSON.parse(localStorage.getItem("blogs")) || [];
-
-  blogs.push(newBlog);
-
-  localStorage.setItem("blogs", JSON.stringify(blogs));
-
-  window.location.href = "home.html";
-};
-
-function clearForm() {
-  form.elements["question"].value = "";
-  form.elements["description"].value = "";
-  form.elements["fileInput"].value = "";
-  form.elements["question"].focus();
-}
+});

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     postHeader.appendChild(meta);
 
     const image = document.createElement("img");
-image.src = blog.fileName ? `img/${blog.fileName}` : "https://placehold.co/600x300/e0e0e0/000000?text=Blog+Image";
+image.src = blog.imageData || "https://placehold.co/600x300/e0e0e0/000000?text=Blog+Image";
       image.alt = "Blog Post Image";
     image.className = "post-image";
 
