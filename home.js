@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const blogCard = document.createElement("div");
     blogCard.className = "blog-post-card";
 
-    // Post Header
     const postHeader = document.createElement("div");
     postHeader.className = "post-header";
 
